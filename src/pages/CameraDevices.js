@@ -1,77 +1,105 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Webcam from "react-webcam";
+import * as tf from "@tensorflow/tfjs";
+import * as facemesh from "@tensorflow-models/face-landmarks-detection";
 import { Container } from "react-bootstrap";
+import { drawMesh } from "../utils/utilities";
 
 const CameraDevices = () => {
-  const [deviceId, setDeviceId] = useState(null);
-  const [devices, setDevices] = useState([]);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-
-  const handleDevices = useCallback(
-    (mediaDevices) => {
-      setDevices(mediaDevices.filter((device) => device.kind === "videoinput"));
-    },
-    [setDevices]
-  );
+  const [model, setModel] = useState(null);
 
   useEffect(() => {
-    const getUserMedia = () => {
-      navigator.mediaDevices.enumerateDevices().then(handleDevices);
+    const loadModel = async () => {
+      const net = facemesh.SupportedModels.MediaPipeFaceMesh;
+      const detectorConfig = {
+        runtime: "mediapipe", // or 'tfjs'
+        solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh",
+      };
+      const detector = await facemesh.createDetector(net, detectorConfig);
+      setModel(detector);
     };
-    getUserMedia();
-  }, [handleDevices]);
 
-  const drawImge = () => {
-    const video = webcamRef.current;
-    const canvas = canvasRef.current;
-    if (video && canvas) {
-      const ctx = canvas.getContext("2d");
+    loadModel();
+  }, [setModel]);
 
-      canvas.width = video.video.videoWidth;
-      canvas.height = video.video.videoHeight;
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (model) {
+        console.log(model);
+        detect(model);
+      }
+    }, 100);
 
-      // We want also the canvas to display de image mirrored
-      ctx.translate(canvas.width, 0);
-      ctx.scale(-1, 1);
-      ctx.drawImage(video.video, 0, 0, canvas.width, canvas.height);
-      //   ctx.scale(-1, 1);
-      //   ctx.translate(-canvas.width, 0);
-      //   var faceArea = 300;
-      //   var pX = canvas.width / 2 - faceArea / 2;
-      //   var pY = canvas.height / 2 - faceArea / 2;
+    return () => clearInterval(timer);
+  }, []);
 
-      //   ctx.rect(pX, pY, faceArea, faceArea);
-      //   ctx.lineWidth = "6";
-      //   ctx.strokeStyle = "red";
-      //   ctx.stroke();
-      setTimeout(drawImge, 1);
+  const detect = async (model) => {
+    if (
+      typeof webcamRef.current !== "undefined" &&
+      webcamRef.current !== null &&
+      webcamRef.current.video.readyState === 4
+    ) {
+      // Get Video Properties
+      const video = webcamRef.current.video;
+      const videoWidth = webcamRef.current.video.videoWidth;
+      const videoHeight = webcamRef.current.video.videoHeight;
+
+      // Set video width
+      webcamRef.current.video.width = videoWidth;
+      webcamRef.current.video.height = videoHeight;
+
+      // Set canvas width
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
+
+      // Make Detections
+      // OLD MODEL
+      //       const face = await net.estimateFaces(video);
+      // NEW MODEL
+      const face = await model.estimateFaces({ input: video });
+      console.log(face);
+
+      // Get canvas context
+      const ctx = canvasRef.current.getContext("2d");
+      requestAnimationFrame(() => {
+        drawMesh(face, ctx);
+      });
     }
   };
-  setTimeout(drawImge, 1);
 
   return (
     <Container className="mt-2 text-center">
-      {devices.map((device, key) => (
-        <div key={key}>
-          <Webcam
-            ref={webcamRef}
-            audio={false}
-            style={{ width: "0%", height: "0%" }}
-            mirrored={true}
-            onUserMedia={(stream) => {
-              console.log(stream);
-            }}
-            videoConstraints={{
-              deviceId: device.deviceId,
-              width: 1280,
-              height: 720,
-            }}
-          />
-          <p>{device.label || `Device ${key + 1}`}</p>
-        </div>
-      ))}
-      <canvas ref={canvasRef} />
+      <Webcam
+        ref={webcamRef}
+        style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          zindex: 9,
+          width: 640,
+          height: 480,
+        }}
+      />
+
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          left: 0,
+          right: 0,
+          textAlign: "center",
+          zindex: 9,
+          width: 640,
+          height: 480,
+        }}
+      />
     </Container>
   );
 };
