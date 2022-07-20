@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Webcam from "react-webcam";
-import * as tf from "@tensorflow/tfjs";
-import * as facemesh from "@tensorflow-models/face-landmarks-detection";
+import * as faceLandmarksDetection from "@tensorflow-models/face-landmarks-detection";
+import "@tensorflow/tfjs-core";
+// Register WebGL backend.
+import "@tensorflow/tfjs-backend-webgl";
+import "@mediapipe/face_mesh";
 import { Container } from "react-bootstrap";
 import { drawMesh } from "../utils/utilities";
 
@@ -12,12 +15,16 @@ const CameraDevices = () => {
 
   useEffect(() => {
     const loadModel = async () => {
-      const net = facemesh.SupportedModels.MediaPipeFaceMesh;
+      const net = faceLandmarksDetection.SupportedModels.MediaPipeFaceMesh;
       const detectorConfig = {
         runtime: "mediapipe", // or 'tfjs'
         solutionPath: "https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh",
       };
-      const detector = await facemesh.createDetector(net, detectorConfig);
+      const detector = await faceLandmarksDetection.createDetector(
+        model,
+        detectorConfig
+      );
+      console.log(detector);
       setModel(detector);
     };
 
@@ -28,14 +35,14 @@ const CameraDevices = () => {
     const timer = setInterval(() => {
       if (model) {
         console.log(model);
-        detect(model);
+        detect();
       }
     }, 100);
 
     return () => clearInterval(timer);
   }, []);
 
-  const detect = async (model) => {
+  const detect = async () => {
     if (
       typeof webcamRef.current !== "undefined" &&
       webcamRef.current !== null &&
@@ -58,8 +65,8 @@ const CameraDevices = () => {
       // OLD MODEL
       //       const face = await net.estimateFaces(video);
       // NEW MODEL
-      const face = await model.estimateFaces({ input: video });
-      console.log(face);
+      const estimationConfig = { flipHorizontal: false };
+      const face = await model.estimateFaces(video, estimationConfig);
 
       // Get canvas context
       const ctx = canvasRef.current.getContext("2d");
