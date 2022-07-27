@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, ListGroup } from "react-bootstrap";
+import { Container, ListGroup } from "react-bootstrap";
 import BlogLink from "../components/Blog/BlogLink";
 
 const Home = () => {
