@@ -12,6 +12,37 @@ const FaceDetection = () => {
   const connect = window.drawConnectors;
   let camera = null;
 
+  const drawLandmark = (multiFaceLandmarks, canvasCtx) => {
+    for (const landmarks of multiFaceLandmarks) {
+      // connect(canvasCtx, landmarks, Facemesh.FACEMESH_TESSELATION, {
+      //   color: "#C0C0C070",
+      //   lineWidth: 1,
+      // });
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYE, {
+        color: "#FF3030",
+        lineWidth: 1,
+      });
+      // connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYEBROW, {
+      //   color: "#FF3030",
+      // });
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_LEFT_EYE, {
+        color: "#30FF30",
+        lineWidth: 1,
+      });
+      // connect(canvasCtx, landmarks, Facemesh.FACEMESH_LEFT_EYEBROW, {
+      //   color: "#30FF30",
+      // });
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_FACE_OVAL, {
+        color: "#E0E0E0",
+        lineWidth: 1,
+      });
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_LIPS, {
+        color: "#E0E0E0",
+        lineWidth: 1,
+      });
+    }
+  };
+
   const onResults = (results) => {
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;
@@ -22,6 +53,7 @@ const FaceDetection = () => {
 
     const canvasElement = canvasRef.current;
     const canvasCtx = canvasElement.getContext("2d");
+
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     canvasCtx.drawImage(
@@ -31,32 +63,9 @@ const FaceDetection = () => {
       canvasElement.width,
       canvasElement.height
     );
-    if (results.multiFaceLandmarks) {
-      for (const landmarks of results.multiFaceLandmarks) {
-        // connect(canvasCtx, landmarks, Facemesh.FACEMESH_TESSELATION, {
-        //   color: "#C0C0C070",
-        //   lineWidth: 1,
-        // });
-        connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYE, {
-          color: "#FF3030",
-        });
-        connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYEBROW, {
-          color: "#FF3030",
-        });
-        connect(canvasCtx, landmarks, Facemesh.FACEMESH_LEFT_EYE, {
-          color: "#30FF30",
-        });
-        connect(canvasCtx, landmarks, Facemesh.FACEMESH_LEFT_EYEBROW, {
-          color: "#30FF30",
-        });
-        connect(canvasCtx, landmarks, Facemesh.FACEMESH_FACE_OVAL, {
-          color: "#E0E0E0",
-        });
-        connect(canvasCtx, landmarks, Facemesh.FACEMESH_LIPS, {
-          color: "#E0E0E0",
-        });
-      }
-    }
+    if (results.multiFaceLandmarks)
+      drawLandmark(results.multiFaceLandmarks, canvasCtx);
+
     canvasCtx.restore();
   };
 
