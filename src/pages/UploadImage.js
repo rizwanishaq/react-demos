@@ -23,7 +23,7 @@ const UploadImage = () => {
     listAll(imageListRef).then((response) => {
       setImageList([]);
       response.items.map((item) => {
-        getDownloadURL(item).then((url) => {
+        return getDownloadURL(item).then((url) => {
           setImageList((prev) => [...prev, url]);
         });
       });
