@@ -17,7 +17,7 @@ const BinanceData = () => {
     <>
       <div>{JSON.stringify(data)}</div>
       <div>e: {data["e"]}</div>
-      <div>E: {data["E"]}</div>
+      <div>Date: {new Date(data["E"]).toLocaleString("es-ES")}</div>
       <div>s: {data["s"]}</div>
       <div>k: {JSON.stringify(data["k"])}</div>
     </>

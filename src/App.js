@@ -27,6 +27,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import GeoLocation from "./pages/GeoLocation";
 import BinanceData from "./pages/BinanceData";
+import UseWebSocketExample from "./pages/UseWebSocketExample";
 // import MermaidExample from "./pages/MermaidExample";
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/geolocation" element={<GeoLocation />} />
         <Route path="/binancewebsocket" element={<BinanceData />} />
+        <Route path="/usewebsocketexample" element={<UseWebSocketExample />} />
       </Routes>
     </>
   );

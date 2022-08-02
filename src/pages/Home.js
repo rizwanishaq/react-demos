@@ -175,6 +175,12 @@ const Home = () => {
               text={"BinanceWebsocket example"}
               link={"/binancewebsocket"}
             />
+            <BlogLink
+              key={"UseWebsocket Example"}
+              title={"UseWebsocket Example"}
+              text={"UseWebsocket Example"}
+              link={"/usewebsocketexample"}
+            />
           </Tab>
         </Tabs>
       </ListGroup>
