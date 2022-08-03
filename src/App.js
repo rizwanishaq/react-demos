@@ -29,7 +29,7 @@ import GeoLocation from "./pages/GeoLocation";
 import BinanceData from "./pages/BinanceData";
 import UseWebSocketExample from "./pages/UseWebSocketExample";
 import SimpleBootStrapExample from "./pages/SimpleBootStrapExample";
-import Footer from "./components/layouts/Footer";
+// import Footer from "./components/layouts/Footer";
 
 function App() {
   return (

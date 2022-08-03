@@ -1,17 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {
-  Container,
-  ListGroup,
-  Tabs,
-  Tab,
-  Row,
-  Col,
-  Image,
-  Button,
-  Card,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { Link } from "react-router-dom";
-import BlogLink from "../components/Blog/BlogLink";
 import SelfDetail from "../components/Home/SelfDetail";
 import HomeImage from "../components/Home/HomeImage";
 import MiddleCard from "../components/Home/MiddleCard";
