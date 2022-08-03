@@ -37,6 +37,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/react-demos" element={<Home />} />
         <Route path="/About" element={<Personal />} />
         <Route path="/piechart" element={<ScatterPlot />} />
         {/* <Route
