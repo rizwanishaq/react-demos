@@ -38,9 +38,6 @@ const Header = () => {
           </Nav>
 
           <Nav className="mr-auto">
-            <LinkContainer to="/About">
-              <Nav.Link>About</Nav.Link>
-            </LinkContainer>
             {user ? (
               <>
                 <LinkContainer to="/">

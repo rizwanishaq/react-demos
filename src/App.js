@@ -29,6 +29,8 @@ import GeoLocation from "./pages/GeoLocation";
 import BinanceData from "./pages/BinanceData";
 import UseWebSocketExample from "./pages/UseWebSocketExample";
 import SimpleBootStrapExample from "./pages/SimpleBootStrapExample";
+import Footer from "./components/layouts/Footer";
+import MachineLearningDemos from "./pages/MachineLearningDemos";
 // import MermaidExample from "./pages/MermaidExample";
 
 function App() {
@@ -68,7 +70,12 @@ function App() {
         <Route path="/binancewebsocket" element={<BinanceData />} />
         <Route path="/usewebsocketexample" element={<UseWebSocketExample />} />
         <Route path="/bootstrapexample" element={<SimpleBootStrapExample />} />
+        <Route
+          path="/machinelearningdemos"
+          element={<MachineLearningDemos />}
+        />
       </Routes>
+      {/* <Footer /> */}
     </>
   );
 }
