@@ -39,19 +39,21 @@ const Header = () => {
             </LinkContainer>
           </Nav>
 
-          <Nav>
-            <LinkContainer to="#" variant="dark">
-              <Nav.Link>
-                {location.city.length > 0 ? `${location.city} ` : ""}
-                {location.weather ? (
-                  <Image src={location.weather.icon} />
-                ) : (
-                  ""
-                )}{" "}
-                {Math.ceil(location.temperature.temp)}&deg;
-              </Nav.Link>
-            </LinkContainer>
-          </Nav>
+          {location.temperature && location.weather && (
+            <Nav>
+              <LinkContainer to="#" variant="dark">
+                <Nav.Link>
+                  {location.city.length > 0 ? `${location.city} ` : ""}
+                  {location.weather ? (
+                    <Image src={location.weather.icon} />
+                  ) : (
+                    ""
+                  )}{" "}
+                  {Math.ceil(location.temperature.temp)}&deg;
+                </Nav.Link>
+              </LinkContainer>
+            </Nav>
+          )}
 
           <Nav className="mr-auto">
             {user ? (
