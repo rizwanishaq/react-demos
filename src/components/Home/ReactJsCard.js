@@ -54,12 +54,6 @@ const ReactJsCard = () => {
         />
 
         <BlogLink
-          key={"GeoLocation"}
-          title={"GeoLocation"}
-          text={"GeoLocation example"}
-          link={"/geolocation"}
-        />
-        <BlogLink
           key={"BinanceWebsocket"}
           title={"BinanceWebsocket"}
           text={"BinanceWebsocket example"}
@@ -70,12 +64,6 @@ const ReactJsCard = () => {
           title={"UseWebsocket Example"}
           text={"UseWebsocket Example"}
           link={"/usewebsocketexample"}
-        />
-        <BlogLink
-          key={"BootStrapExample"}
-          title={"BootStrapExample"}
-          text={"BootStrap Example"}
-          link={"/bootstrapexample"}
         />
       </ListGroup>
     </Col>

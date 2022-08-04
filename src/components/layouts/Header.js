@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { ImHome } from "react-icons/im";
 import { useLogout } from "../../hooks/useLogout";
+import { useLocation } from "../../hooks/useLocation";
 
 const Header = () => {
   const { logout, user } = useLogout();
+  const { location } = useLocation();
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
@@ -34,6 +36,20 @@ const Header = () => {
           <Nav>
             <LinkContainer to="#" variant="dark">
               <Nav.Link>{date.toLocaleTimeString()}</Nav.Link>
+            </LinkContainer>
+          </Nav>
+
+          <Nav>
+            <LinkContainer to="#" variant="dark">
+              <Nav.Link>
+                {location.city.length > 0 ? `${location.city} ` : ""}
+                {/* {location.weather[0].icon !== "undefined" ? (
+                  <Image src={location.weather[0].icon} />
+                ) : (
+                  ""
+                )}{" "} */}
+                {Math.ceil(location.temperature.temp)}&deg;
+              </Nav.Link>
             </LinkContainer>
           </Nav>
 
