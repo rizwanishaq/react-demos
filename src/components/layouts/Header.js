@@ -43,11 +43,11 @@ const Header = () => {
             <LinkContainer to="#" variant="dark">
               <Nav.Link>
                 {location.city.length > 0 ? `${location.city} ` : ""}
-                {/* {location.weather[0].icon !== "undefined" ? (
-                  <Image src={location.weather[0].icon} />
+                {location.weather ? (
+                  <Image src={location.weather.icon} />
                 ) : (
                   ""
-                )}{" "} */}
+                )}{" "}
                 {Math.ceil(location.temperature.temp)}&deg;
               </Nav.Link>
             </LinkContainer>

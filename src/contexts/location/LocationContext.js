@@ -22,27 +22,26 @@ const LocationContextProvider = ({ children }) => {
   });
 
   const success = async (position) => {
-    // const response = await axios.get(
-    //   `${baseURL}?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`
-    // );
+    const response = await axios.get(
+      `${baseURL}?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`
+    );
 
     const weatherResponse = await axios.get(
       `${weatherUrl}lat=${position.coords.latitude}&lon=${position.coords.longitude}`
     );
 
-    const weatherData = weatherResponse.data;
-    console.log(weatherData.data);
+    const { main, weather } = weatherResponse.data;
 
-    // const { city, locality, countryName } = await response.data;
+    const { city, countryName } = await response.data;
     setLocation({
-      city: weatherData.name,
-      country: weatherData.sys.country,
+      city,
+      country: countryName,
       error: "",
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
       status: "success",
-      temperature: weatherData.main,
-      weather: weatherData.weather,
+      temperature: main,
+      weather: weather.length > 0 ? weather[0] : {},
     });
   };
 
