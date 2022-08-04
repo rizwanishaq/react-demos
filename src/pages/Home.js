@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <Container className="mt-3">
       <Row className="my-3">
-        <HomeImage url={homeimageUrl[pageType]} />
+        <HomeImage />
         {pageType === "home" && <SelfDetail />}
         {pageType === "machinelearning" && <MachineLearning />}
         {pageType === "reactjs" && <ReactJsCard />}
@@ -35,10 +35,7 @@ const Home = () => {
 
       <Row>
         <Link to="#">
-          <MiddleCard
-            text={"Click on this to go to the home page"}
-            setPageType={setPageType}
-          />
+          <MiddleCard setPageType={setPageType} />
         </Link>
       </Row>
       <Row>
