@@ -30,6 +30,7 @@ import UseWebSocketExample from "./pages/UseWebSocketExample";
 import SimpleBootStrapExample from "./pages/SimpleBootStrapExample";
 import D3Example from "./pages/D3Example";
 import VideoFrames from "./pages/VideoFrames";
+import SelfiSegmentation from "./pages/SelfiSegmentation";
 // import Footer from "./components/layouts/Footer";
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
         <Route path="/bootstrapexample" element={<SimpleBootStrapExample />} />
         <Route path="/d3examples" element={<D3Example />} />
         <Route path="/videoframes" element={<VideoFrames />} />
+        <Route path="/selfeisegmentation" element={<SelfiSegmentation />} />
       </Routes>
       {/* <Footer /> */}
     </>
