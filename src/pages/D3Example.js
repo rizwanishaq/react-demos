@@ -4,39 +4,23 @@ import Container from "react-bootstrap/Container";
 
 // Ref: https://wattenberger.com/blog/react-and-d3
 
-const getNumber = () => {
-  return Math.floor(Math.random() * 50);
-};
-
-const generateDataset = () => {
-  return [
-    [getNumber(), getNumber()],
-    [getNumber(), getNumber()],
-    [getNumber(), getNumber()],
-    [getNumber(), getNumber()],
-    [getNumber(), getNumber()],
-  ];
-};
-
 const D3Example = () => {
-  const [dataset, setDataset] = useState(generateDataset());
   const ref = useRef();
+
   useEffect(() => {
+    const xScale = d3.scaleLinear().domain([0, 100]).range([10, 290]);
+
     const svgElement = d3.select(ref.current);
-    svgElement
-      .selectAll("circle")
-      .data(dataset)
-      .join("circle")
-      .attr("cx", (d) => d[0])
-      .attr("cy", (d) => d[1])
-      .attr("r", 3);
-  }, [dataset]);
+    const axisGenerator = d3.axisBottom(xScale);
 
-  setTimeout(() => {
-    setDataset(generateDataset());
-  }, 1000);
+    svgElement.append("g").call(axisGenerator);
+  }, []);
 
-  return <svg ref={ref} />;
+  return (
+    <Container>
+      <svg ref={ref} />
+    </Container>
+  );
 };
 
 export default D3Example;

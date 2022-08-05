@@ -14,24 +14,26 @@ const FaceDetection = () => {
 
   const drawLandmark = (multiFaceLandmarks, canvasCtx) => {
     for (const landmarks of multiFaceLandmarks) {
-      // connect(canvasCtx, landmarks, Facemesh.FACEMESH_TESSELATION, {
-      //   color: "#C0C0C070",
-      //   lineWidth: 1,
-      // });
-      connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYE, {
-        color: "#FF3030",
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_TESSELATION, {
+        color: "#C0C0C070",
         lineWidth: 1,
       });
-      // connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYEBROW, {
-      //   color: "#FF3030",
-      // });
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYE, {
+        color: "#30FF30",
+        lineWidth: 1,
+      });
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_RIGHT_EYEBROW, {
+        color: "#30FF30",
+        lineWidth: 1,
+      });
       connect(canvasCtx, landmarks, Facemesh.FACEMESH_LEFT_EYE, {
         color: "#30FF30",
         lineWidth: 1,
       });
-      // connect(canvasCtx, landmarks, Facemesh.FACEMESH_LEFT_EYEBROW, {
-      //   color: "#30FF30",
-      // });
+      connect(canvasCtx, landmarks, Facemesh.FACEMESH_LEFT_EYEBROW, {
+        color: "#30FF30",
+        lineWidth: 1,
+      });
       connect(canvasCtx, landmarks, Facemesh.FACEMESH_FACE_OVAL, {
         color: "#E0E0E0",
         lineWidth: 1,
