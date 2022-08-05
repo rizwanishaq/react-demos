@@ -23,14 +23,21 @@ const VideoFrames = () => {
       console.log("cleared");
       clearInterval(timer);
     };
-  }, []);
+  }, [capture]);
 
   return (
     <Container className="mt-2 text-center">
       <Row>
         <Col sm={6}>
           <Card>
-            <Webcam ref={webcamRef} screenshotFormat="image/jpeg" />
+            <Webcam
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              screenshotQuality={1.0}
+              onUserMedia={(e) => {
+                console.log("stream started");
+              }}
+            />
             <Card.Body>
               <Card.Title>Original Video</Card.Title>
               <Card.Text>
