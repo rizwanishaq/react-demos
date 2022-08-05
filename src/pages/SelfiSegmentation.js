@@ -36,7 +36,7 @@ const SelfiSegmentation = () => {
 
     // Only overwrite existing pixels.
     canvasCtx.globalCompositeOperation = "source-in";
-    canvasCtx.fillStyle = "#0000FF7F";
+    canvasCtx.fillStyle = "#ffffff";
     canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
     // Only overwrite missing pixels.
@@ -55,10 +55,11 @@ const SelfiSegmentation = () => {
   useEffect(() => {
     const selfieSegmentation = new SelfieSegmentation({
       locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1/${file}`;
       },
     });
     selfieSegmentation.setOptions({
+      selfieMode: true,
       modelSelection: 1,
     });
 

@@ -20,7 +20,6 @@ import { drawConnectors } from "@mediapipe/drawing_utils";
 const FaceDetection = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  let camera = null;
 
   const drawLandmark = (multiFaceLandmarks, canvasCtx) => {
     for (const landmarks of multiFaceLandmarks) {
@@ -100,7 +99,7 @@ const FaceDetection = () => {
       typeof webcamRef.current !== "undefined" &&
       webcamRef.current !== null
     ) {
-      camera = new Camera(webcamRef.current.video, {
+      const camera = new Camera(webcamRef.current.video, {
         onFrame: async () => {
           await faceMesh.send({ image: webcamRef.current.video });
         },
