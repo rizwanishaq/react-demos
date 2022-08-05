@@ -28,6 +28,8 @@ import SignIn from "./pages/SignIn";
 import BinanceData from "./pages/BinanceData";
 import UseWebSocketExample from "./pages/UseWebSocketExample";
 import SimpleBootStrapExample from "./pages/SimpleBootStrapExample";
+import D3Example from "./pages/D3Example";
+import VideoFrames from "./pages/VideoFrames";
 // import Footer from "./components/layouts/Footer";
 
 function App() {
@@ -67,6 +69,8 @@ function App() {
         <Route path="/binancewebsocket" element={<BinanceData />} />
         <Route path="/usewebsocketexample" element={<UseWebSocketExample />} />
         <Route path="/bootstrapexample" element={<SimpleBootStrapExample />} />
+        <Route path="/d3examples" element={<D3Example />} />
+        <Route path="/videoframes" element={<VideoFrames />} />
       </Routes>
       {/* <Footer /> */}
     </>
