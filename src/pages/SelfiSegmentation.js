@@ -35,7 +35,7 @@ const SelfiSegmentation = () => {
     );
 
     // Only overwrite existing pixels.
-    canvasCtx.globalCompositeOperation = "source-in";
+    canvasCtx.globalCompositeOperation = "source-out"; // source-in for foreground and source-out for background
     canvasCtx.fillStyle = "#ffffff";
     canvasCtx.fillRect(0, 0, canvasElement.width, canvasElement.height);
 
@@ -59,7 +59,7 @@ const SelfiSegmentation = () => {
       },
     });
     selfieSegmentation.setOptions({
-      selfieMode: true,
+      selfieMode: false,
       modelSelection: 1,
     });
 
