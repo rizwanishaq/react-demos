@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const SelfDetail = () => {
   return (
     <Col sm={5}>
-      <h1 className="font-weight-light">Rizwan Ishaq</h1>
+      <h1 className="font-weight-light">RizPoint</h1>
       <p className="mt-4">
         I am a fullStack Artificial Engineer(AI), working on Audio and computer
         vision tasks with tensorflow from start to production. Along with
