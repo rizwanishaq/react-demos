@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const BlogLink = ({ title, text, link }) => {
   return (
     <ListGroup.Item style={{ border: "none" }}>
-      <Link to={link} style={{ "text-decoration": "none" }}>
+      <Link to={link} style={{ textDecoration: "none" }}>
         {" "}
         {text}
       </Link>
