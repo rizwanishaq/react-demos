@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import * as tf from "@tensorflow/tfjs";
 import * as speech from "@tensorflow-models/speech-commands";
 import { toast } from "react-toastify";
 import { Container, Row, Col } from "react-bootstrap";

@@ -90,7 +90,7 @@ const FaceDetection = () => {
       maxNumFaces: 1,
       minDetectionConfidence: 0.5,
       minTrackingConfidence: 0.5,
-      selfieMode: true,
+      selfieMode: false,
     });
 
     faceMesh.onResults(onResults);
