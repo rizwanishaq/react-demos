@@ -100,6 +100,12 @@ const SelfiSegmentation = () => {
       <canvas
         ref={canvasRef}
         style={{
+          container: {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "auto",
+          },
           position: "absolute",
           marginLeft: "auto",
           marginRight: "auto",
